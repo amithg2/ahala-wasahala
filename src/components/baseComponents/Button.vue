@@ -14,14 +14,13 @@ const props = defineProps(["text", "onClick", "height"]);
 <style scoped>
 button {
   width: 100%;
-  height: 70px;
+  height: 50px;
   background: linear-gradient(206.69deg, #a6fff7 -61.23%, #008a7f 88.25%);
   text-align: center;
   border-radius: 60px;
   color: #ffffff;
   font-size: 20px;
   font-weight: 700;
-  line-height: 47px;
   text-align: center;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;

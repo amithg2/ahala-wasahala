@@ -28,7 +28,7 @@ main {
 }
 
 .router-wrapper {
-  height: 94%;
+  height: 75%;
   width: 100%;
   overflow: hidden;
   border-radius: 0 0 10px 10px;

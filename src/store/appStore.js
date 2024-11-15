@@ -21,8 +21,9 @@ export const useAppStore = defineStore("app", {
         setTimeout(() => {
           const question = getQuestionById(id);
           state.setCurQuestion(question);
-          if(state.selectedAnswers[question.id]) state.selectedCurAnswerId = state.selectedAnswers[question.id];
-      
+          if (state.selectedAnswers[question.id])
+            state.selectedCurAnswerId = state.selectedAnswers[question.id];
+
           resolve(question);
         }, 300);
       });

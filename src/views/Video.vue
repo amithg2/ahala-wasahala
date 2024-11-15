@@ -1,8 +1,20 @@
 <template>
   <div class="fill-page">
-    <h1>Video</h1>
-    <div class="center-element">
-      <Button class="start-button" :onClick="buttonClicked" text="התחל >>" />
+    <div class="iframe-wrapper center-element">
+      <iframe
+      width="90%"
+      height="80%"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=WgiGJhj1ewtB6tMI"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
+    </div>
+    
+    <div class="start-button-wrapper">
+      <Button :onClick="buttonClicked" text="התחל >>" />
     </div>
   </div>
 </template>
@@ -17,7 +29,12 @@ const buttonClicked = () => {
 </script>
 
 <style scoped>
-.start-button {
+.iframe-wrapper {
+  width: 100%;
+  height: 60%;
+}
+.start-button-wrapper {
   width: 80%;
+  margin: 0 auto;
 }
 </style>
