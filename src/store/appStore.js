@@ -5,7 +5,8 @@ import { getQuestionById } from "../questions";
 export const useAppStore = defineStore("app", {
   state: () => ({
     curQuestion: null,
-    selectedAnswerId: null,
+    selectedCurAnswerId: null,
+    selectedAnswers: {},
   }),
 
   actions: {
@@ -19,28 +20,32 @@ export const useAppStore = defineStore("app", {
       return new Promise((resolve) => {
         setTimeout(() => {
           const question = getQuestionById(id);
-          console.log(question);
           state.setCurQuestion(question);
+          if(state.selectedAnswers[question.id]) state.selectedCurAnswerId = state.selectedAnswers[question.id];
+      
           resolve(question);
-        }, 1000);
+        }, 300);
       });
     },
 
-    setSelectedAnswerId(answerId) {
-      this.selectedAnswerId = answerId;
+    setSelectedCurAnswerId(answerId) {
+      this.selectedCurAnswerId = answerId;
+      const question = this.curQuestion;
+      if (answerId) this.selectedAnswers[question.id] = answerId;
     },
+
     checkRightAnswer(qId, answer) {
       //Like api request
       return new Promise((resolve) => {
         setTimeout(() => {
           resolve(isGoodAnswer(qId, answer));
-        }, 1000);
+        }, 300);
       });
     },
   },
 
   getters: {
     getCurQuestion: (state) => state.curQuestion,
-    getSelectedAnswerId: (state) => state.selectedAnswerId, 
+    getselectedCurAnswerId: (state) => state.selectedCurAnswerId,
   },
 });

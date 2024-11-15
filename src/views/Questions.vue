@@ -1,26 +1,26 @@
 <template>
   <div v-if="question" class="question-wrapper">
-    <p class="question">{{ question.question }} </p>
+    <p class="question">{{ question.question }}</p>
 
     <ul>
       <li
         class="answer"
         v-for="(answer, num) in question.options"
         :key="answer.id"
-        @click="appStore.setSelectedAnswerId(answer.aId)"
-        :class="[answer.aId === appStore.getSelectedAnswerId && 'selected']"
+        @click="appStore.setSelectedCurAnswerId(answer.aId)"
+        :class="[answer.aId === appStore.getselectedCurAnswerId && 'selected']"
       >
-        <div class="">
+        <span>
           {{ num + 1 }}.
           {{ answer.ans }}
-        </div>
+        </span>
 
         <div
-          v-show="answer.aId !== appStore.getSelectedAnswerId"
+          v-show="answer.aId !== appStore.getselectedCurAnswerId"
           class="radio"
         ></div>
         <img
-          v-show="answer.aId === appStore.getSelectedAnswerId"
+          v-show="answer.aId === appStore.getselectedCurAnswerId"
           src="../assets/icons/v-icon.svg"
           alt="v-icon"
           class="v-icon"
@@ -33,14 +33,24 @@
 <script setup>
 import { useRoute } from "vue-router";
 import { useAppStore } from "../store/appStore";
-import { computed, onBeforeMount } from "vue";
+import { computed, onBeforeMount, watch } from "vue";
 
 const route = useRoute();
 const question = computed(() => appStore.getCurQuestion);
 const appStore = useAppStore();
 
+watch(
+  () => route.params.id,
+  async (newId) => {
+    appStore.setCurQuestion(null);
+    await appStore.getQuestionById(+newId);
+  }
+);
+
 onBeforeMount(async () => {
+  appStore.setCurQuestion(null);
   const questionId = +route.params.id;
+
   await appStore.getQuestionById(questionId);
 });
 </script>
@@ -53,7 +63,7 @@ onBeforeMount(async () => {
 
 .question {
   font-family: Heebo;
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 500;
   text-align: right;
   text-underline-position: from-font;
@@ -67,7 +77,7 @@ ul {
 
 .answer {
   height: 40px;
-  margin: 10px 0;
+  margin: 14px 0;
   padding: 10px;
   list-style: none;
   background: rgba(217, 217, 217, 0.1);
@@ -76,7 +86,7 @@ ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .radio {
@@ -88,7 +98,7 @@ ul {
 }
 
 .selected {
-  outline: 3.63px solid rgba(69, 170, 162, 1);
+  outline: 2px solid rgba(69, 170, 162, 1);
   color: rgba(69, 170, 162, 1);
 }
 
