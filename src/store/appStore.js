@@ -30,7 +30,7 @@ export const useAppStore = defineStore("app", {
 
           resolve(question);
           state.isLoading = false;
-        }, 1000);
+        }, 500);
       });
     },
 

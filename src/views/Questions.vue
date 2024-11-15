@@ -7,7 +7,7 @@
         <li
           class="answer"
           v-for="(answer, num) in question.options"
-          :key="answer.id"
+          :key="answer.aId"
           @click="appStore.setSelectedCurAnswerId(answer.aId)"
           :class="[
             answer.aId === appStore.getselectedCurAnswerId && 'selected',
@@ -39,6 +39,7 @@
 import { useRoute, useRouter } from "vue-router";
 import { useAppStore } from "../store/appStore";
 import { computed, onBeforeMount, watch } from "vue";
+
 import Button from "../components/baseComponents/Button.vue";
 
 const route = useRoute();
@@ -47,6 +48,7 @@ const appStore = useAppStore();
 
 const question = computed(() => appStore.getCurQuestion);
 const isShowNextButton = computed(() => appStore.getCurQuestion?.id === 5);
+
 watch(
   () => route.params.id,
   async (newId) => {
@@ -58,7 +60,6 @@ watch(
 onBeforeMount(async () => {
   appStore.setCurQuestion(null);
   const questionId = +route.params.id;
-
   await appStore.getQuestionById(questionId);
 });
 

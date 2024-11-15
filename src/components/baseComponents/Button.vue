@@ -1,14 +1,11 @@
 <template>
-  <button
-    @click="props.onClick"
-    :style="{ height: props.height ? props.height : '' }"
-  >
+  <button @click="props.onClick">
     {{ props.text }}
   </button>
 </template>
 
 <script setup>
-const props = defineProps(["text", "onClick", "height"]);
+const props = defineProps(["text", "onClick"]);
 </script>
 
 <style scoped>

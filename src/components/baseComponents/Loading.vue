@@ -21,7 +21,6 @@
   bottom: 0;
   z-index: 9999;
   opacity: 0.9;
-  /* background-color: #f5f5f5; */
   color: #000;
   font-size: 20px;
   font-weight: bold;

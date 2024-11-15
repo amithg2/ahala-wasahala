@@ -26,6 +26,7 @@ import { useAppStore } from "../store/appStore";
 const appStore = useAppStore();
 const route = useRoute();
 const router = useRouter();
+
 const isShowButtons = computed(() => route.path.includes("/questions") && appStore.getCurQuestion?.id < 5);
 
 const backClicked = () => {

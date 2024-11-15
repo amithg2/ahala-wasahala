@@ -11,13 +11,13 @@
 </template>
 
 <script setup>
+import { computed } from "vue";
 import AppBarImg from "./assets/images/app-bar.png";
 import ArrowsHeader from "./components/ArrowsHeader.vue";
 import NavigationHeader from "./components/NavigationHeader.vue";
 import Loading from "./components/baseComponents/Loading.vue";
-import { computed } from "vue";
-
 import { useAppStore } from "./store/appStore";
+
 const appStore = useAppStore();
 
 const isLoading = computed(() => appStore.getIsLoading);
