@@ -12,7 +12,7 @@ import Button from "../components/baseComponents/Button.vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
 const buttonClicked = () => {
-  router.push("/questions");
+  router.push("/questions/1");
 };
 </script>
 
