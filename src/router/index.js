@@ -16,15 +16,9 @@ const routes = [
     name: "Video",
     component: Video,
   },
-
-  {
-    path: "/questions",
-    name: "Questions",
-    component: Questions,
-  },
   {
     path: "/questions/:id",
-    name: "VideoDetail",
+    name: "Question",
     component: Questions,
   },
 
