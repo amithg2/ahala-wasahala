@@ -1,4 +1,4 @@
-export const questions = [
+const questions = [
   {
     id: 1,
     question: "עד כמה אתה אוהב ללמוד ערבית עם אַהְלַא וּסַהְלַא?",
@@ -129,14 +129,6 @@ export const questions = [
     ],
   },
 ];
-
-export const isGoodAnswer = (qId, answerId) => {
-  if (qId === 1) return answerId === "a1-1";
-  if (qId === 2) return answerId === "a2-1";
-  if (qId === 3) return answerId === "a3-4";
-  if (qId === 4) return answerId === "a4-2";
-  if (qId === 5) return answerId === "a5-1";
-};
 
 export const getQuestionById = (id) => {
   return questions.find((q) => q.id === id);

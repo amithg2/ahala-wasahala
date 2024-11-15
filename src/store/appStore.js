@@ -1,15 +1,18 @@
 import { defineStore } from "pinia";
-import { isGoodAnswer } from "../questions";
 import { getQuestionById } from "../questions";
 
 export const useAppStore = defineStore("app", {
   state: () => ({
+    isLoading: false,
     curQuestion: null,
     selectedCurAnswerId: null,
     selectedAnswers: {},
   }),
 
   actions: {
+    setIsLoading(loading) {
+      this.isLoading = loading;
+    },
     setCurQuestion(question) {
       this.curQuestion = question;
     },
@@ -17,6 +20,7 @@ export const useAppStore = defineStore("app", {
     getQuestionById(id) {
       //Like api request
       const state = this;
+      this.isLoading = true;
       return new Promise((resolve) => {
         setTimeout(() => {
           const question = getQuestionById(id);
@@ -25,7 +29,8 @@ export const useAppStore = defineStore("app", {
             state.selectedCurAnswerId = state.selectedAnswers[question.id];
 
           resolve(question);
-        }, 300);
+          state.isLoading = false;
+        }, 1000);
       });
     },
 
@@ -34,19 +39,11 @@ export const useAppStore = defineStore("app", {
       const question = this.curQuestion;
       if (answerId) this.selectedAnswers[question.id] = answerId;
     },
-
-    checkRightAnswer(qId, answer) {
-      //Like api request
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(isGoodAnswer(qId, answer));
-        }, 300);
-      });
-    },
   },
 
   getters: {
     getCurQuestion: (state) => state.curQuestion,
     getselectedCurAnswerId: (state) => state.selectedCurAnswerId,
+    getIsLoading: (state) => state.isLoading,
   },
 });

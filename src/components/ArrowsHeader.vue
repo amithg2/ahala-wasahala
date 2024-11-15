@@ -14,7 +14,7 @@
       />
     </div>
 
-    <img v-else src="../assets/images/logo.png" alt="logo" class="logo" />
+    <img v-else-if="!appStore.getIsLoading" src="../assets/images/logo.png" alt="logo" class="logo" />
   </div>
 </template>
 

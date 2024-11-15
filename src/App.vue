@@ -1,5 +1,6 @@
 <template>
   <main>
+    <Loading v-if="isLoading" />
     <img :src="AppBarImg" alt="app-bar" class="phone-header" />
     <ArrowsHeader />
     <NavigationHeader />
@@ -13,6 +14,13 @@
 import AppBarImg from "./assets/images/app-bar.png";
 import ArrowsHeader from "./components/ArrowsHeader.vue";
 import NavigationHeader from "./components/NavigationHeader.vue";
+import Loading from "./components/baseComponents/Loading.vue";
+import { computed } from "vue";
+
+import { useAppStore } from "./store/appStore";
+const appStore = useAppStore();
+
+const isLoading = computed(() => appStore.getIsLoading);
 </script>
 
 <style scoped>
@@ -25,6 +33,7 @@ main {
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   direction: rtl;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 8px;
 }
 
 .router-wrapper {
