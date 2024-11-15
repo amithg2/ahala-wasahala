@@ -6,6 +6,8 @@
         src="../assets/icons/chevron-right.svg"
         alt="arrow right"
       />
+
+      <span class="counter"> {{ appStore.getCurQuestion?.id }} / 5</span>
       <img
         @click="continueClicked"
         :class="['continue', appStore.selectedCurAnswerId && 'continue-bg']"
@@ -14,7 +16,12 @@
       />
     </div>
 
-    <img v-else-if="!appStore.getIsLoading" src="../assets/images/logo.png" alt="logo" class="logo" />
+    <img
+      v-else-if="!appStore.getIsLoading"
+      src="../assets/images/logo.png"
+      alt="logo"
+      class="logo"
+    />
   </div>
 </template>
 
@@ -27,7 +34,9 @@ const appStore = useAppStore();
 const route = useRoute();
 const router = useRouter();
 
-const isShowButtons = computed(() => route.path.includes("/questions") && appStore.getCurQuestion?.id < 5);
+const isShowButtons = computed(
+  () => route.path.includes("/questions") && appStore.getCurQuestion?.id < 5
+);
 
 const backClicked = () => {
   appStore.setSelectedCurAnswerId(null);
@@ -58,6 +67,7 @@ const continueClicked = () => {
   align-items: center;
   margin: 0 auto;
   height: 100%;
+  position: relative;
 }
 
 .continue {
@@ -68,5 +78,13 @@ const continueClicked = () => {
 .continue-bg {
   background: linear-gradient(206.69deg, #a6fff7 -61.23%, #008a7f 88.25%);
   cursor: pointer;
+}
+
+.counter {
+  width: 50px;
+  position: absolute;
+  right: calc(50% - 32px);
+  direction: ltr;
+  text-align: center;
 }
 </style>
